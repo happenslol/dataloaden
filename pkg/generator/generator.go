@@ -63,18 +63,6 @@ func parseType(str string) (*goType, error) {
 		t.ImportPath = ""
 	}
 
-	if t.ImportPath != "" {
-		p, err := packages.Load(&packages.Config{Mode: packages.NeedName}, t.ImportPath)
-		if err != nil {
-			return nil, err
-		}
-		if len(p) != 1 {
-			return nil, fmt.Errorf("not found")
-		}
-
-		t.ImportName = p[0].Name
-	}
-
 	return t, nil
 }
 
@@ -117,10 +105,6 @@ func getData(name string, keyType string, valueType string, wd string) (template
 	if genPkg.PkgPath == data.ValType.ImportPath {
 		data.ValType.ImportName = ""
 		data.ValType.ImportPath = ""
-	}
-	if genPkg.PkgPath == data.KeyType.ImportPath {
-		data.KeyType.ImportName = ""
-		data.KeyType.ImportPath = ""
 	}
 
 	return data, nil
