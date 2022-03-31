@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/vektah/dataloaden/example"
+	"github.com/happenslol/dataloaden/example"
 )
 
 func NewLoader() *UserSliceLoader {
