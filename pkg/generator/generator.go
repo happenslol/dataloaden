@@ -63,6 +63,12 @@ func parseType(str string) (*goType, error) {
 		t.ImportPath = ""
 	}
 
+	if t.ImportPath != "" {
+		parts := strings.Split(t.ImportPath, "/")
+		last := parts[len(parts)-1]
+		t.ImportName = last
+	}
+
 	return t, nil
 }
 
@@ -105,6 +111,10 @@ func getData(name string, keyType string, valueType string, wd string) (template
 	if genPkg.PkgPath == data.ValType.ImportPath {
 		data.ValType.ImportName = ""
 		data.ValType.ImportPath = ""
+	}
+	if genPkg.PkgPath == data.KeyType.ImportPath {
+		data.KeyType.ImportName = ""
+		data.KeyType.ImportPath = ""
 	}
 
 	return data, nil
